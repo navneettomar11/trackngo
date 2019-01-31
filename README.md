@@ -26,7 +26,7 @@ A Employee transport solution system is a software system designed to manage tra
 - Nodejs: https://nodejs.org/en/download/
 - Install ionic : https://ionicframework.com/docs/v1/guide/installation.html
 
-#Development
+# Development
 1. Clone https://github.com/navneettomar11/trackngo.git (git clone https://github.com/navneettomar11/trackngo.gi)
 2. cd trackngo
 3. npm install
