@@ -5,6 +5,7 @@ import { mergeMap, materialize, delay, dematerialize } from 'rxjs/operators';
 
 const users = [
   {
+    id:'johndoe',
     name: 'John Doe',
     type: "EMPLOYEE",
     email:"john.doe@test.com",
@@ -20,6 +21,7 @@ const users = [
         lat_long: ""
     }
   },{
+      id: 'tomjerry',
       name: 'Tom Jerry',
       type: "DRIVER",
       email:"tom.jerry@test.com",
@@ -37,6 +39,27 @@ const users = [
   }
 ];
 
+const userSchedules = [
+  {
+    type: 'LOGIN',
+    userId: 'johndoe',
+    status: 'SCHEDULED',
+    scheduleDate: '',
+  },
+  {
+    type: 'LOGIN',
+    userId: 'johndoe',
+    status: 'SCHEDULED',
+    scheduleDate: '',
+  },
+  {
+    type: 'LOGIN',
+    userId: 'johndoe',
+    status: 'SCHEDULED',
+    scheduleDate: '',
+  }
+]
+
 @Injectable()
 export class MimicBackendInterceptor implements HttpInterceptor{
   
@@ -49,7 +72,7 @@ export class MimicBackendInterceptor implements HttpInterceptor{
       if (req.url.endsWith('/users/authenticate') && req.method === 'POST') {
         return this.userAuthenticationApi(req);
       }else if (req.url.endsWith('/users/schedules') && req.method === 'GET') {
-        
+
       }
       // pass through any requests not handled above
       return next.handle(req);
