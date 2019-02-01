@@ -13,14 +13,24 @@ import { Router } from '@angular/router';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
+      title: 'Schedule',
+      url: '/list',
+      icon: 'time'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'Book Schedule',
+      url: '/home',
+      icon: 'calendar'
+    },
+    {
+      title: 'Trace Cab',
+      url: '/trace-cab',
+      icon: 'car'
+    },
+    {
+      title: 'Profile',
+      url: '/profile',
+      icon: 'contact'
     }
   ];
 
@@ -42,6 +52,11 @@ export class AppComponent {
         if(!state){
           this.router.navigate(['login']);
         }else{
+          this.appPages.push( {
+            title: 'Logout',
+            url: '/logout',
+            icon: 'log-out'
+          });
           this.router.navigate(['home']);
         }
       })

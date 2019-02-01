@@ -1,0 +1,34 @@
+[
+    {
+        "name": "John Doe",
+        "type": "EMPLOYEE",
+        "email":"john.doe@test.com",
+        "mobileNumber":"",
+        "password": "",
+        "address":{
+            "lineOne": "",
+            "lineTwo": "",
+            "city": "",
+            "state":"",
+            "country": "",
+            "pincode": "",
+            "lat_long": ""
+        }
+    },
+    {
+        "name": "Tom Jerry",
+        "type": "DRIVER",
+        "email":"tom.jerry@test.com",
+        "password": "",
+        "mobileNumber":"",
+        "address":{
+            "lineOne": "",
+            "lineTwo": "",
+            "city": "",
+            "state":"",
+            "country": "",
+            "pincode": "",
+            "lat_long": ""
+        }
+    }
+]

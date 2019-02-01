@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Platform } from '@ionic/angular';
 import {Storage} from '@ionic/storage';
+import { HttpClient } from '@angular/common/http';
 
 const TOKEN_KEY = 'auth-token';
 
@@ -11,7 +12,9 @@ const TOKEN_KEY = 'auth-token';
 export class AuthenticationService {
 
   authenticationState = new BehaviorSubject(false);
-  constructor(private storage: Storage, private plft:Platform) { 
+  constructor(private storage: Storage, 
+    private plft:Platform,
+    private httpClient: HttpClient) { 
     this.plft.ready().then( ()=>{
       this.checkToken();
     });
@@ -25,10 +28,14 @@ export class AuthenticationService {
     });
   }
 
-  login(){
+  setToken(){
     return this.storage.set(TOKEN_KEY, 'Bear 123456789').then(()=>{
       this.authenticationState.next(true);
     });
+  }
+
+  login(userName, password){
+    return this.httpClient.post('/users/authenticate',{userName, password});
   }
 
   logout(){
