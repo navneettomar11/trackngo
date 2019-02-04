@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserService } from '../services/user.service';
+import { DatePipe } from '@angular/common';
 
 const ONE_DAY_IN_MILLIS = 24*60*60*1000;
 const DAY_NAMES = ['Sun','Mon','Tue', 'Wed', 'Thus','Fri', 'Sat'];
@@ -11,6 +12,7 @@ const SAT_DAY = 6;
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+  providers: [DatePipe]
 })
 export class HomePage implements OnInit{
   
@@ -20,7 +22,8 @@ export class HomePage implements OnInit{
   private today:Date;
 
   constructor(private authenticationService: AuthenticationService,
-    private userService: UserService){ }
+    private userService: UserService,
+    private datePipe: DatePipe){ }
 
   ngOnInit(): void {
     this.initializeWeekDays();
@@ -28,7 +31,8 @@ export class HomePage implements OnInit{
   }
 
   private loadUserSchedules(){
-    //this.userService.getUserSchedules().subscribe((schedules)=> this.)
+    this.schedules = [];
+    this.userService.getUserSchedules().subscribe((schedules: any[])=> this.schedules = schedules);
   }
 
   initializeWeekDays(){
@@ -65,5 +69,11 @@ export class HomePage implements OnInit{
     if(this.today.getDay() === day) return "secondary";
     if(date.getDay() ===0 || date.getDay()===6) return "primary";
     return "default";
+  }
+
+  getSchedules(date){
+    let filterDate = this.datePipe.transform(date,'yyyy/MM/dd');
+    let schedules= this.schedules.filter((schedule)=> schedule.scheduleDate === filterDate);
+    return schedules;
   }
 }

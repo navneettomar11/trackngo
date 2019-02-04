@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse} from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { mergeMap, materialize, delay, dematerialize } from 'rxjs/operators';
+import { AuthenticationService } from '../services/authentication.service';
+import { AsyncPipe } from '@angular/common';
 
 const users = [
   {
@@ -44,13 +46,13 @@ const userSchedules = [
     type: 'LOGIN',
     userId: 'johndoe',
     status: 'COMPLETED',
-    scheduleDate: '2019/01/31',
+    scheduleDate: '2019/02/04',
     scheduleTime: '09:00'
   },{
-    type: 'LOGUT',
+    type: 'LOGOUT',
     userId: 'johndoe',
     status: 'COMPLETED',
-    scheduleDate: '2019/01/31',
+    scheduleDate: '2019/02/04',
     scheduleTime: '18:00'
   }
 ]
@@ -58,9 +60,19 @@ const userSchedules = [
 @Injectable()
 export class MimicBackendInterceptor implements HttpInterceptor{
   
-  constructor() { }
+  constructor(private authenticationService:AuthenticationService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let token = this.authenticationService.getToken();
+    if(token !== null) {
+      req = req.clone({
+        setHeaders: {
+          'Content-Type' : 'application/json; charset=utf-8',
+          'Accept'       : 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+    }
     // wrap in delayed observable to simulate server api call
     return of(null).pipe(mergeMap(() => {
       // authenticate
@@ -90,8 +102,14 @@ export class MimicBackendInterceptor implements HttpInterceptor{
 
   //
   private getUserSchedules(req: HttpRequest<any>):Observable<HttpResponse<any>>{
+   
     let headerToken = req.headers.get("Authorization");
-    let logginedUserSchedules = userSchedules.filter((schedule)=> schedule.userId === headerToken);
+    if(!!headerToken){
+      headerToken = headerToken.replace('Bearer ','');  
+    }
+    let logginedUserSchedules = userSchedules.filter((schedule)=> {
+      return schedule.userId === headerToken;
+    });
     return of(new HttpResponse({status: 200, body: logginedUserSchedules}));
   }
 }

@@ -17,13 +17,14 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-card *ngFor="let date of dates" color="{{getDayClass(date)}}">
-    <ion-card-header>
-        <ion-card-subtitle text-center>{{date | date : 'EEE, MMM dd, yyyy'}}</ion-card-subtitle>
-    </ion-card-header>  
-    <ion-card-content>
-      
-    </ion-card-content>
-  </ion-card>
-  
-</ion-content>
+  <ion-card *ngFor="let date of dates">
+      <ion-card-header>
+        <ion-card-subtitle>
+            {{date | date : 'EEE, MMM dd, yyyy'}} 
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content *ngFor="let schedule of getSchedules(date)">
+        
+      </ion-card-content>
+    </ion-card>
+ </ion-content>
