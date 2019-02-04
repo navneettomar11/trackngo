@@ -84,6 +84,11 @@ export class MimicBackendInterceptor implements HttpInterceptor{
         return this.userAuthenticationApi(req);
       }else if (req.url.endsWith('/users/schedules') && req.method === 'GET') {
         return this.getUserSchedules(req);
+      }else if (req.url.endsWith('/users') && req.method === 'GET') {
+        return this.getUser(req);
+      }else if (req.url.endsWith('/users') && req.method === 'POST') {
+        console.log("hdwgfhwrgwrgurwguerg");
+        return this.updateUserData(req);
       }
       // pass through any requests not handled above
       return next.handle(req);
@@ -109,5 +114,34 @@ export class MimicBackendInterceptor implements HttpInterceptor{
     let headerToken = req.headers.get("Authorization");
     let logginedUserSchedules = userSchedules.filter((schedule)=> schedule.userId === headerToken);
     return of(new HttpResponse({status: 200, body: logginedUserSchedules}));
+  }
+
+  private getUser(req: HttpRequest<any>):Observable<HttpResponse<any>>{
+    let headerToken = req.headers.get("Authorization");
+    let logginedUser = users.filter((schedule)=> schedule.id === headerToken);
+    if (logginedUser.length === 0) {
+      logginedUser = users[0];
+    }
+    console.log("logginedUser final  ====", users[0]);
+    return of(new HttpResponse({status: 200, body: logginedUser}));
+  }
+
+  private updateUserData(req: HttpRequest<any>):Observable<HttpResponse<any>>{
+    console.log("req.body", req.body);
+    let fetchUser = users.filter((usr)=> usr.id === req.body.id).pop();
+    let postData = req.body.data;
+    console.log("postData =====", postData);
+    Object.keys(fetchUser).forEach(function (key) {
+      fetchUser[key] = (postData[key]) ? postData[key] : fetchUser[key];
+      // do something with obj
+    });
+    Object.keys(fetchUser.address).forEach(function (key) {
+      fetchUser.address[key] = (postData[key]) ? postData[key] : fetchUser.address[key];
+      // do something with obj
+    });
+    console.log("fetchUser ====", fetchUser);
+    users.push(fetchUser);
+    return of(new HttpResponse({status: 200, body: fetchUser}));
+    
   }
 }

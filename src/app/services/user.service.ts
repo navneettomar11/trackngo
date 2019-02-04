@@ -6,9 +6,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getUserSchedules(){
+  getUserSchedules() {
     return this.httpClient.get("/users/schedules");
+  }
+
+  getUserRecords() {
+    return this.httpClient.get("/users");
+  }
+
+  updateUser(id, data) {
+    console.log("hey there!!");
+    return this.httpClient.post('/users', {id: id, data:data});
   }
 }
