@@ -30,7 +30,8 @@ const routes: Routes = [
   { path: 'driverslist', loadChildren: './drivers/driverslist/driverslist.module#DriverslistPageModule' },
   { path: 'adddriver', loadChildren: './drivers/adddriver/adddriver.module#AdddriverPageModule' },
   { path: 'myprofile', loadChildren: './myprofile/myprofile.module#MyprofilePageModule' },
-  { path: 'location', loadChildren: './myprofile/location/location.module#LocationPageModule' }
+  { path: 'location', loadChildren: './myprofile/location/location.module#LocationPageModule' },
+  { path: 'helpdesk', loadChildren: './helpdesk/helpdesk.module#HelpdeskPageModule' }
 
 ];
 
