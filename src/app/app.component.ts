@@ -34,6 +34,29 @@ export class AppComponent {
     }
   ];
 
+  public adminAppPages = [
+    {
+      title: 'Employee',
+      url: '/employees',
+      icon: 'people'
+    },
+    {
+      title: 'Drivers',
+      url: '/drivers',
+      icon: 'speedometer'
+    },
+    {
+      title: 'Trace Cab',
+      url: '/trace-cab',
+      icon: 'car'
+    },
+    {
+      title: 'Profile',
+      url: '/profile',
+      icon: 'contact'
+    }
+  ];
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -48,10 +71,10 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.authenticationService.authenticationState.subscribe((state)=>{
-        if(!state){
+      this.authenticationService.authenticationState.subscribe((state) => {
+        if (!state) {
           this.router.navigate(['login']);
-        }else{
+        } else {
           this.appPages.push( {
             title: 'Logout',
             url: '/logout',
@@ -59,7 +82,11 @@ export class AppComponent {
           });
           this.router.navigate(['home']);
         }
-      })
+      });
     });
+  }
+
+  getAppPages(){
+
   }
 }
