@@ -43,20 +43,15 @@ const userSchedules = [
   {
     type: 'LOGIN',
     userId: 'johndoe',
-    status: 'SCHEDULED',
-    scheduleDate: '',
-  },
-  {
-    type: 'LOGIN',
+    status: 'COMPLETED',
+    scheduleDate: '2019/01/31',
+    scheduleTime: '09:00'
+  },{
+    type: 'LOGUT',
     userId: 'johndoe',
-    status: 'SCHEDULED',
-    scheduleDate: '',
-  },
-  {
-    type: 'LOGIN',
-    userId: 'johndoe',
-    status: 'SCHEDULED',
-    scheduleDate: '',
+    status: 'COMPLETED',
+    scheduleDate: '2019/01/31',
+    scheduleTime: '18:00'
   }
 ]
 
@@ -72,7 +67,7 @@ export class MimicBackendInterceptor implements HttpInterceptor{
       if (req.url.endsWith('/users/authenticate') && req.method === 'POST') {
         return this.userAuthenticationApi(req);
       }else if (req.url.endsWith('/users/schedules') && req.method === 'GET') {
-
+        return this.getUserSchedules(req);
       }
       // pass through any requests not handled above
       return next.handle(req);
@@ -91,5 +86,12 @@ export class MimicBackendInterceptor implements HttpInterceptor{
       return throwError({ error: { message: 'Username or password is incorrect' } })   
     }
     return of(new HttpResponse({status: 200, body: existUser}));
+  }
+
+  //
+  private getUserSchedules(req: HttpRequest<any>):Observable<HttpResponse<any>>{
+    let headerToken = req.headers.get("Authorization");
+    let logginedUserSchedules = userSchedules.filter((schedule)=> schedule.userId === headerToken);
+    return of(new HttpResponse({status: 200, body: logginedUserSchedules}));
   }
 }

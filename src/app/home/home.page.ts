@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { start } from 'repl';
+import { AuthenticationService } from '../services/authentication.service';
+import { SWITCH_CHANGE_DETECTOR_REF_FACTORY__POST_R3__ } from '@angular/core/src/change_detection/change_detector_ref';
 
 const ONE_DAY_IN_MILLIS = 24*60*60*1000;
 const DAY_NAMES = ['Sun','Mon','Tue', 'Wed', 'Thus','Fri', 'Sat'];
+const SUN_DAY = 0;
+const SAT_DAY = 6;
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -12,21 +17,30 @@ export class HomePage implements OnInit{
   
   dates: Date[];
 
+  private today:Date;
+
+  constructor(private authenticationService: AuthenticationService){ }
+
   ngOnInit(): void {
     this.initializeWeekDays();
+    this.loadUserSchedules();
+  }
+
+  private loadUserSchedules(){
+
   }
 
   initializeWeekDays(){
     this.dates = [];
-    let today = new Date();
-    let dayOfWeek = today.getDay();
+    this.today = new Date();
+    let dayOfWeek = this.today.getDay();
     let startDate, endDate;
     if(dayOfWeek > 0){
-      startDate = new Date(today.getTime() - (dayOfWeek-1) * ONE_DAY_IN_MILLIS );
-      endDate = new Date(today.getTime() + (7-dayOfWeek) * ONE_DAY_IN_MILLIS);
+      startDate = new Date(this.today.getTime() - (dayOfWeek-1) * ONE_DAY_IN_MILLIS );
+      endDate = new Date(this.today.getTime() + (7-dayOfWeek) * ONE_DAY_IN_MILLIS);
     }else {
-      startDate = new Date(today.getTime() - 6 * ONE_DAY_IN_MILLIS );
-      endDate = today;
+      startDate = new Date(this.today.getTime() - 6 * ONE_DAY_IN_MILLIS );
+      endDate = this.today;
     }
     while(startDate <= endDate){
       this.dates.push(startDate);
@@ -34,12 +48,20 @@ export class HomePage implements OnInit{
     }
   }
 
+  isTodayDate(date: Date): boolean{
+    return (this.today.getTime() - date.getTime()) <= ONE_DAY_IN_MILLIS;
+  }
+
+  isWeekend(date: Date){
+    return date.getDay() === SUN_DAY || date.getDay() === SAT_DAY;
+  }
+
   getDayName(day){
     return DAY_NAMES[day];
   }
   getDayClass(date){
     let day = date.getDay();
-    if(new Date().getDay() === day) return "secondary";
+    if(this.today.getDay() === day) return "secondary";
     if(date.getDay() ===0 || date.getDay()===6) return "primary";
     return "default";
   }

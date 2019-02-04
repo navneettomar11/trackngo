@@ -8,5 +8,7 @@ export class UserService {
 
   constructor(private httpClient:HttpClient) { }
 
- 
+  getUserSchedules(){
+    return this.httpClient.get("/users/schedules");
+  }
 }
