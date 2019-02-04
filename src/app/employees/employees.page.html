@@ -6,11 +6,11 @@
 
 <ion-content padding>
   <ion-content padding>
-    <ion-item [routerDirection]="'employee'" href="/drivers/employeelist" (click)="gotoAddress()">
+    <ion-item [routerLink]="'/emplist'" routerDirection="forward">
       <ion-icon name="list-box"></ion-icon>
       <ion-label>&nbsp;&nbsp;Employee's List</ion-label>
     </ion-item>
-    <ion-item [routerDirection]="'drivers'" href="/drivers/addemployee">
+    <ion-item [routerLink]="'/addemp'" routerDirection="forward">
       <ion-icon name="person-add"></ion-icon><ion-label>&nbsp;&nbsp;Add Employee</ion-label>
     </ion-item>
   </ion-content>

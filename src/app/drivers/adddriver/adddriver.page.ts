@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-adddriver',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdddriverPage implements OnInit {
 
-  constructor() { }
+  private addDriver: FormGroup;
+
+  constructor( private formBuilder: FormBuilder ) {
+    this.addDriver = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: [''],
+    });
+  }
+  logForm() {
+    console.log(this.addDriver.value);
+  }
 
   ngOnInit() {
   }
