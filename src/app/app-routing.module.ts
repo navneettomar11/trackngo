@@ -28,7 +28,9 @@ const routes: Routes = [
   { path: 'employees', loadChildren: './employees/employees.module#EmployeesPageModule' },
   { path: 'drivers', loadChildren: './drivers/drivers.module#DriversPageModule' },
   { path: 'driverslist', loadChildren: './drivers/driverslist/driverslist.module#DriverslistPageModule' },
-  { path: 'adddriver', loadChildren: './drivers/adddriver/adddriver.module#AdddriverPageModule' }
+  { path: 'adddriver', loadChildren: './drivers/adddriver/adddriver.module#AdddriverPageModule' },
+  { path: 'emplist', loadChildren: './Employees/emplist/emplist.module#EmplistPageModule' },
+  { path: 'addemp', loadChildren: './Employees/addemp/addemp.module#AddempPageModule' }
 ];
 
 @NgModule({
