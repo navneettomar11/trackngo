@@ -12,8 +12,12 @@ export class AdddriverPage implements OnInit {
 
   constructor( private formBuilder: FormBuilder ) {
     this.addDriver = this.formBuilder.group({
-      title: ['', Validators.required],
-      description: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      vehicleType: ['', Validators.required],
+      capacity: ['', Validators.required],
+      description: ['']
     });
   }
   logForm() {
