@@ -108,7 +108,9 @@ export class MimicBackendInterceptor implements HttpInterceptor{
       headerToken = headerToken.replace('Bearer ','');  
     }
     let logginedUserSchedules = userSchedules.filter((schedule)=> {
-      return schedule.userId === headerToken;
+      if(schedule.userId === headerToken){
+        
+      }
     });
     return of(new HttpResponse({status: 200, body: logginedUserSchedules}));
   }
