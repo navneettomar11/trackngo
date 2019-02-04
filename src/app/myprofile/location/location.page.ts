@@ -8,7 +8,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./location.page.scss'],
 })
 export class LocationPage implements OnInit {
-  data: any[];
+  data: any = {};
   success: boolean;
 
   private updateAddress: FormGroup;
@@ -41,14 +41,37 @@ export class LocationPage implements OnInit {
   getUsers(): void {
     this.userService.getUserRecords()
         .subscribe(data => {
-          this.data = data;
-          this.updateAddress.controls['name'].setValue(data.name, {onlySelf : true});
-          this.updateAddress.controls['phoneNumber'].setValue(data.mobileNumber, {onlySelf : true});
-          this.updateAddress.controls['addressOne'].setValue(data.address.lineOne, {onlySelf : true});
-          this.updateAddress.controls['addressTwo'].setValue(data.address.lineTwo, {onlySelf : true});
-          this.updateAddress.controls['city'].setValue(data.address.city, {onlySelf : true});
-          this.updateAddress.controls['state'].setValue(data.address.state, {onlySelf : true});
-          this.updateAddress.controls['country'].setValue(data.address.country, {onlySelf : true});
+          this.data =<any> {data} ;
+          if(data.hasOwnProperty('name')) {
+            this.updateAddress.controls['name'].setValue(this.data.name, {onlySelf : true});
+          }
+          if(data.hasOwnProperty('phoneNumber')) {
+            this.updateAddress.controls['phoneNumber'].setValue(this.data.mobileNumber, {onlySelf : true});
+          }
+          if(data.hasOwnProperty('address') && this.data.address.hasOwnProperty('lineOne')) {
+            this.updateAddress.controls['addressOne'].setValue(this.data.address.lineOne, {onlySelf : true});
+          }
+          if(data.hasOwnProperty('address') && this.data.address.hasOwnProperty('lineTwo')) {
+            this.updateAddress.controls['addressTwo'].setValue(this.data.address.lineTwo, {onlySelf : true});
+          }
+          if(data.hasOwnProperty('address') && this.data.address.hasOwnProperty('city')) {
+            this.updateAddress.controls['city'].setValue(this.data.address.city, {onlySelf : true});
+          }
+          if(data.hasOwnProperty('address') && this.data.address.hasOwnProperty('state')) {
+            this.updateAddress.controls['state'].setValue(this.data.address.state, {onlySelf : true});
+          }
+          if(data.hasOwnProperty('address') && this.data.address.hasOwnProperty('country')) {
+            this.updateAddress.controls['country'].setValue(this.data.address.country, {onlySelf : true});
+          
+          }
+
+          // this.updateAddress.controls['name'].setValue(data.name, {onlySelf : true});
+          // this.updateAddress.controls['phoneNumber'].setValue(data.mobileNumber, {onlySelf : true});
+          // this.updateAddress.controls['addressOne'].setValue(data.address.lineOne, {onlySelf : true});
+          // this.updateAddress.controls['addressTwo'].setValue(data.address.lineTwo, {onlySelf : true});
+          // this.updateAddress.controls['city'].setValue(data.address.city, {onlySelf : true});
+          // this.updateAddress.controls['state'].setValue(data.address.state, {onlySelf : true});
+          // this.updateAddress.controls['country'].setValue(data.address.country, {onlySelf : true});
         })
   }
 

@@ -118,8 +118,8 @@ export class MimicBackendInterceptor implements HttpInterceptor{
 
   private getUser(req: HttpRequest<any>):Observable<HttpResponse<any>>{
     let headerToken = req.headers.get("Authorization");
-    let logginedUser = users.filter((schedule)=> schedule.id === headerToken);
-    if (logginedUser.length === 0) {
+    let logginedUser: any = users.filter((schedule)=> schedule.id === headerToken);
+    if (Object.keys(logginedUser).length === 0) {
       logginedUser = users[0];
     }
     console.log("logginedUser final  ====", users[0]);
