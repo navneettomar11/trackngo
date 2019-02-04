@@ -29,7 +29,7 @@ export class HomePage implements OnInit{
   }
 
   private loadUserSchedules(){
-    this.userService.getUserSchedules().subscribe((schedules)=> this.)
+    //this.userService.getUserSchedules().subscribe((schedules)=> this.)
   }
 
   initializeWeekDays(){
