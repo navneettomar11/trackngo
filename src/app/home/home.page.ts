@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { start } from 'repl';
 import { AuthenticationService } from '../services/authentication.service';
-import { SWITCH_CHANGE_DETECTOR_REF_FACTORY__POST_R3__ } from '@angular/core/src/change_detection/change_detector_ref';
 import { UserService } from '../services/user.service';
 
 const ONE_DAY_IN_MILLIS = 24*60*60*1000;
@@ -17,7 +16,7 @@ const SAT_DAY = 6;
 export class HomePage implements OnInit{
   
   dates: Date[];
-  schedules: Schedule[];
+  schedules: any[];
 
   private today:Date;
 
