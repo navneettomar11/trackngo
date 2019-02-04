@@ -38,7 +38,23 @@ const users = [
           pincode: "12345",
           lat_long: ""
       }
-  }
+  },{
+        id: 'admin',
+        name: 'Admin',
+        type: "ADMIN",
+        email:"admin@test.com",
+        mobileNumber:"9526320219",
+        password: "admin",
+        address:{
+            lineOne: "Paritek Park",
+            lineTwo: "Eco Space",
+            city: "Banglore",
+            state:"Banglore",
+            country: "IN",
+            pincode: "12345",
+            lat_long: ""
+        }
+    }
 ];
 
 const userSchedules = [

@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Drivers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-content padding>
+    <ion-item [routerDirection]="'drivers'" href="/drivers/driverslist" (click)="gotoAddress()">
+      <ion-icon name="list-box"></ion-icon>
+      <ion-label>&nbsp;&nbsp;Driver's List</ion-label>
+    </ion-item>
+    <ion-item [routerDirection]="'drivers'" href="/drivers/adddriver">
+      <ion-icon name="person-add"></ion-icon><ion-label>&nbsp;&nbsp;Add Driver</ion-label>
+    </ion-item>
+  </ion-content>
+</ion-content>

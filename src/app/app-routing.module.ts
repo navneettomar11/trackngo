@@ -24,7 +24,11 @@ const routes: Routes = [
     loadChildren: './login/login.module#LoginPageModule'
   },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' }
+  { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' },
+  { path: 'employees', loadChildren: './employees/employees.module#EmployeesPageModule' },
+  { path: 'drivers', loadChildren: './drivers/drivers.module#DriversPageModule' },
+  { path: 'driverslist', loadChildren: './drivers/driverslist/driverslist.module#DriverslistPageModule' },
+  { path: 'adddriver', loadChildren: './drivers/adddriver/adddriver.module#AdddriverPageModule' }
 ];
 
 @NgModule({
