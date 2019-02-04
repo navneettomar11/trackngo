@@ -29,7 +29,7 @@ export class AppComponent {
     },
     {
       title: 'Profile',
-      url: '/profile',
+      url: '/myprofile',
       icon: 'contact'
     }
   ];

@@ -40,7 +40,5 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
   }
 
-  public gotoAddress(){
-    this.router.navigateByUrl(AddressPage);
-  }
+
 }
