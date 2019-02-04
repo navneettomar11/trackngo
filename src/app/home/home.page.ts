@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { start } from 'repl';
 import { AuthenticationService } from '../services/authentication.service';
 import { SWITCH_CHANGE_DETECTOR_REF_FACTORY__POST_R3__ } from '@angular/core/src/change_detection/change_detector_ref';
+import { UserService } from '../services/user.service';
 
 const ONE_DAY_IN_MILLIS = 24*60*60*1000;
 const DAY_NAMES = ['Sun','Mon','Tue', 'Wed', 'Thus','Fri', 'Sat'];
@@ -16,10 +17,12 @@ const SAT_DAY = 6;
 export class HomePage implements OnInit{
   
   dates: Date[];
+  schedules: Schedule[];
 
   private today:Date;
 
-  constructor(private authenticationService: AuthenticationService){ }
+  constructor(private authenticationService: AuthenticationService,
+    private userService: UserService){ }
 
   ngOnInit(): void {
     this.initializeWeekDays();
@@ -27,7 +30,7 @@ export class HomePage implements OnInit{
   }
 
   private loadUserSchedules(){
-
+    this.userService.getUserSchedules().subscribe((schedules)=> this.)
   }
 
   initializeWeekDays(){
