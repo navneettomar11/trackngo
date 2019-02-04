@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AdddriverPage} from '../adddriver/adddriver.page';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-driverslist',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DriverslistPage implements OnInit {
 
-  constructor() { }
+  items: Array<string>  = new Array<string>();
+  protected key: any;
 
-  ngOnInit() {
+  constructor(protected storage: Storage) {
+    this.items = [];
   }
-
+  ngOnInit() {
+    this.storage.forEach( (value) => {
+      if (value.type !== undefined) {
+        if (value.type === 'driver') {
+          this.items.push('' + value.firstName + ' ' + value.lastName + ' : ' + value.vehicleType + ' ' + value.capacity + 'SEATER');
+        } else {
+          this.items.push('No Driver\'s detail found!');
+        }
+      }
+    });
+  }
 }

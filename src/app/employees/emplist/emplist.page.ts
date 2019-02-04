@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-emplist',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmplistPage implements OnInit {
 
-  constructor() { }
+  items: Array<string>  = new Array<string>();
+  protected key: any;
+
+  constructor(protected storage: Storage) {this.items = []; }
 
   ngOnInit() {
+    this.storage.forEach( (value) => {
+      if (value.type !== undefined) {
+        if (value.type === 'employee') {
+          this.items.push('' + value.firstName + ' ' + value.lastName + ' : ' + value.empId);
+        } else {
+          this.items.push('No Employee detail found!');
+        }
+      }
+    });
   }
 
 }

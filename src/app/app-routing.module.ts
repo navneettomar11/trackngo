@@ -31,7 +31,9 @@ const routes: Routes = [
   { path: 'adddriver', loadChildren: './drivers/adddriver/adddriver.module#AdddriverPageModule' },
   { path: 'myprofile', loadChildren: './myprofile/myprofile.module#MyprofilePageModule' },
   { path: 'location', loadChildren: './myprofile/location/location.module#LocationPageModule' },
-  { path: 'helpdesk', loadChildren: './helpdesk/helpdesk.module#HelpdeskPageModule' }
+  { path: 'helpdesk', loadChildren: './helpdesk/helpdesk.module#HelpdeskPageModule' },
+  { path: 'addemp', loadChildren: './employees/addemp/addemp.module#AddempPageModule' },
+  { path: 'emplist', loadChildren: './employees/emplist/emplist.module#EmplistPageModule' },
 
 ];
 

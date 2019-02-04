@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-addemp',
@@ -9,17 +10,24 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class AddempPage implements OnInit {
 
   private addEmp: FormGroup;
+  public dataToStore;
 
-  constructor( private formBuilder: FormBuilder ) {
+  constructor( private formBuilder: FormBuilder, protected storage: Storage ) {
     this.addEmp = this.formBuilder.group({
       empId : ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       phoneNumber: ['', Validators.required],
-      description: ['']
+      address: ['', Validators.required]
     });
   }
   logForm() {
+    this.addEmp.value.type = 'employee';
+    this.dataToStore = this.addEmp.value;
+    this.storage.set('object', this.dataToStore).then((successData) => {
+      console.log('Data Stored');
+      console.log(successData);
+    });
     console.log(this.addEmp.value);
   }
 
