@@ -22,15 +22,8 @@ constructor(private formBuilder: FormBuilder, protected storage: Storage ) {
 
   postMessage() {
     console.log('Data sent to admin');
-    this.helpDesk.value.success = '';
     this.dataToStore = this.helpDesk.value;
     this.success = true;
-    this.storage.set('object', this.dataToStore).then((successData) => {
-      this.helpDesk.value.success = 'Successfully Saved!';
-      console.log('Data Stored');
-      console.log(successData);
-    });
-    console.log(this.helpDesk.value);
   }
   goback() {
     window.history.back();
