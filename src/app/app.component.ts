@@ -29,8 +29,13 @@ export class AppComponent {
     },
     {
       title: 'Profile',
-      url: '/profile',
+      url: '/myprofile',
       icon: 'contact'
+    },
+    {
+      title: 'HelpDesk',
+      url: '/helpdesk',
+      icon: 'help'
     }
   ];
 

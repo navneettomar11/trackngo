@@ -1,9 +1,48 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>adddriver</ion-title>
+    <ion-title>Add Driver</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
+  <form [formGroup]="addDriver" (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label>First Name : </ion-label>
+      <ion-input type="text" formControlName="firstName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Last Name : </ion-label>
+      <ion-input type="text" formControlName="lastName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Phone Number : </ion-label>
+      <ion-input type="number" formControlName="phoneNumber"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Vehicle Type : </ion-label>
+      <ion-select type="dropdown" formControlName="vehicleType">
+        <ion-select-option>SEDAN</ion-select-option>
+        <ion-select-option>SUV</ion-select-option>
+        <ion-select-option>VAN</ion-select-option>
+        <ion-select-option>BUS</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Capacity : </ion-label>
+      <ion-select type="text" formControlName="capacity">
+        <ion-select-option>4</ion-select-option>
+        <ion-select-option>9</ion-select-option>
+        <ion-select-option>12</ion-select-option>
+        <ion-select-option>14</ion-select-option>
+        <ion-select-option>24</ion-select-option>
+        <ion-select-option>30</ion-select-option>
+        <ion-select-option>50</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Address</ion-label>
+      <ion-textarea formControlName="description"></ion-textarea>
+    </ion-item>
+    <ion-button type="submit" [disabled]="!addDriver.valid" align-self-center="true">Submit</ion-button>
+  </form>
 </ion-content>

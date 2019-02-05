@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>location</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <form [formGroup]="updateAddress" (ngSubmit)="logForm()">
+      <ion-item>
+        <ion-label>Name : </ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Phone Number : </ion-label>
+        <ion-input type="number" formControlName="phoneNumber" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Address One : </ion-label>
+        <ion-input type="text" formControlName="addressOne" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Address Two : </ion-label>
+        <ion-input type="text" formControlName="addressTwo" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>City : </ion-label>
+        <ion-input type="text" formControlName="city" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>State : </ion-label>
+        <ion-input type="text" formControlName="state" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Country : </ion-label>
+        <ion-input type="text" formControlName="country" required></ion-input>
+      </ion-item>
+
+      
+      <ion-button type="submit" align-self-center="true">Submit</ion-button>
+    </form>
+  </ion-content>
+  <div padding *ngIf="success" class="message-area">
+    Data Saved successfully!!.
+  </div>
