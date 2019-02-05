@@ -37,6 +37,10 @@ export class AdddriverPage implements OnInit {
     console.log(this.addDriver.value);
   }
 
+  goback() {
+    window.history.back();
+  }
+
   ngOnInit() {
   }
 }
