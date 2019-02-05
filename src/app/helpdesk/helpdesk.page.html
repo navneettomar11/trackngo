@@ -7,7 +7,7 @@
 <ion-content padding>
     <form [formGroup]="helpDesk" (ngSubmit)="postMessage()">
         <ion-item>
-            <ion-label>Problem Description : </ion-label>
+            <ion-label>Problem Description :</ion-label>
             <ion-textarea formControlName="problem"></ion-textarea>
         </ion-item>
         <ion-button type="submit" [disabled]="!helpDesk.valid" align-self-center="true">Submit</ion-button>
