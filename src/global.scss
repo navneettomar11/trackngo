@@ -9,3 +9,15 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+$font-path: './assets/fonts/';
+$font-family-base: "Lato-Regular";
+
+@font-face {
+    font-family: "Lato-Regular";
+    src: url($font-path+'/Lato-Regular.ttf');
+}
+
+* {
+    font-family: $font-family-base;
+}

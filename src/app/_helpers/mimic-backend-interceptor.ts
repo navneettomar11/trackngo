@@ -4,6 +4,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { mergeMap, materialize, delay, dematerialize } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
 import { AsyncPipe } from '@angular/common';
+import { Schedule } from '../models/schedule';
 
 const users = [
   {
@@ -57,7 +58,7 @@ const users = [
     }
 ];
 
-const userSchedules = [
+const userSchedules: Schedule[] = [
   {
     type: 'LOGIN',
     userId: 'johndoe',
@@ -67,11 +68,13 @@ const userSchedules = [
   },{
     type: 'LOGOUT',
     userId: 'johndoe',
-    status: 'COMPLETED',
+    status: 'CANCEL',
     scheduleDate: '2019/02/04',
-    scheduleTime: '18:00'
+    scheduleTime: '18:00',
   }
-]
+];
+
+
 
 @Injectable()
 export class MimicBackendInterceptor implements HttpInterceptor{
@@ -125,8 +128,10 @@ export class MimicBackendInterceptor implements HttpInterceptor{
     }
     let logginedUserSchedules = userSchedules.filter((schedule)=> {
       if(schedule.userId === headerToken){
-        
+          let user = users.filter((user)=> user.id === schedule.userId).pop();
+          schedule.user = user;
       }
+      return schedule;
     });
     return of(new HttpResponse({status: 200, body: logginedUserSchedules}));
   }

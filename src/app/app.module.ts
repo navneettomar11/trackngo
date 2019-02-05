@@ -15,10 +15,10 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
 import { MimicBackendInterceptor } from './_helpers/mimic-backend-interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TimePickerComponent } from './time-picker/time-picker.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, TimePickerComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -35,6 +35,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {provide: HTTP_INTERCEPTORS, useClass: MimicBackendInterceptor, multi: true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[
+    TimePickerComponent
+  ]
 })
 export class AppModule {}
