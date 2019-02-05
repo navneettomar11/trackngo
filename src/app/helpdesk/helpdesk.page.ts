@@ -9,8 +9,8 @@ import { Storage } from '@ionic/storage';
 })
 export class HelpdeskPage implements OnInit {
 
-private addDriver: FormGroup;
-public dataToStore;
+    private helpDesk: FormGroup;
+    public dataToStore;
 
 constructor(private formBuilder: FormBuilder, protected storage: Storage ) {
     this.dataToStore = {};
@@ -18,20 +18,21 @@ constructor(private formBuilder: FormBuilder, protected storage: Storage ) {
       problem: ['', Validators.required]
     });
   }
+
   postMessage() {
     console.log('Data sent to admin');
     this.helpDesk.value.success = '';
     this.dataToStore = this.helpDesk.value;
 
     this.storage.set('object', this.dataToStore).then((successData) => {
-      this.helpDesk.value.success = 'Successfully Saved!'
+      this.helpDesk.value.success = 'Successfully Saved!';
       console.log('Data Stored');
       console.log(successData);
     });
     console.log(this.helpDesk.value);
   }
 
+    ngOnInit() {
+    }
 
-
-
- }
+}
