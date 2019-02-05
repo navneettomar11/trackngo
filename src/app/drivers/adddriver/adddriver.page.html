@@ -43,6 +43,6 @@
       <ion-label>Address</ion-label>
       <ion-textarea formControlName="description"></ion-textarea>
     </ion-item>
-    <ion-button type="submit" [disabled]="!addDriver.valid" align-self-center="true">Submit</ion-button>
+    <ion-button type="submit" [disabled]="!addDriver.valid" align-self-center="true">Submit</ion-button><ion-label>{{dataToStore.success}}</ion-label>
   </form>
 </ion-content>

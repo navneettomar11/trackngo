@@ -8,7 +8,7 @@
   <form [formGroup]="addEmp" (ngSubmit)="logForm()">
     <ion-item>
       <ion-label>Employee ID : </ion-label>
-      <ion-input type="number" formControlName="empId"></ion-input>
+      <ion-input type="text" formControlName="empId"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>First Name : </ion-label>
@@ -24,8 +24,8 @@
     </ion-item>
     <ion-item>
       <ion-label>Address</ion-label>
-      <ion-textarea formControlName="description"></ion-textarea>
+      <ion-textarea formControlName="address"></ion-textarea>
     </ion-item>
-    <ion-button type="submit" [disabled]="!addDriver.valid" align-self-center="true">Submit</ion-button>
+    <ion-button type="submit" [disabled]="!addEmp.valid" align-self-center="true">Submit</ion-button>
   </form>
 </ion-content>
