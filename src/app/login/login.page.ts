@@ -22,10 +22,9 @@ export class LoginPage implements OnInit {
   }
 
    login(){
-    this.authenticationService.login(this.username, this.password).subscribe((resp)=>{
-      this.authenticationService.setToken().then(()=>{
-        this.router.navigate(['/home']);
-      });
+    this.authenticationService.login(this.username, this.password).subscribe((user:any)=>{
+      this.authenticationService.setToken(user.id);
+      setTimeout(() => window.location.reload(),0);
     },async (error)=>{
        const alert = await this.alertController.create({
         header: 'Error',

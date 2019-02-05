@@ -11,19 +11,106 @@
 <ion-content>
   <ion-grid>
     <ion-row nowrap class="ion-date-row">
-      <ion-col *ngFor="let date of dates"  text-center>
-        <ion-badge color="{{getDayClass(date)}}">{{date.getDate() > 9 ? date.getDate():'0'+date.getDate()}}</ion-badge>
-        <small>{{getDayName(date.getDay())}}</small>
+      <ion-col *ngFor="let date of dates" text-center>
+        <span style="cursor:pointer;" (click)="setSelectedDate(date)">
+          <ion-badge color="{{getDayClass(date)}}">{{date.getDate() > 9 ? date.getDate():'0'+date.getDate()}}</ion-badge>
+          <small>{{getDayName(date.getDay())}}</small>
+        </span>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-card *ngFor="let date of dates" color="{{getDayClass(date)}}">
-    <ion-card-header>
-        <ion-card-subtitle text-center>{{date | date : 'EEE, MMM dd, yyyy'}}</ion-card-subtitle>
-    </ion-card-header>  
-    <ion-card-content>
-      
-    </ion-card-content>
-  </ion-card>
-  
-</ion-content>
+  <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle text-center>
+            {{selectedDate | date : 'EEE, MMM dd, yyyy'}} 
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ng-container *ngIf="isDateHaveSchedule(selectedDate)">
+        <ion-card [id]="idx" *ngFor="let schedule of getSchedules(selectedDate); index as idx" color="{{schedule.status==='COMPLETED'?'success': schedule.status==='CANCEL'?'danger':'default'}}">
+          <ion-card-header>
+            <ion-card-subtitle text-uppercase>
+              <ion-grid>
+                <ion-row>
+                  <ion-col text-left size="2">
+                    <ion-icon name="{{schedule.type==='LOGIN'?'log-in':'log-out'}}"></ion-icon> 
+                  </ion-col>
+                  <ion-col text-center size="3">
+                    {{schedule.scheduleTime}}
+                  </ion-col>
+                  <ion-col text-right size="7">
+                      {{schedule.status}} 
+                    </ion-col>
+                </ion-row>
+              </ion-grid> 
+             </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="4">
+                  Pickup:
+                </ion-col>
+                <ion-col size="8">
+                  {{ schedule.type === 'LOGIN' ? makeUserAddress(schedule.user): 'Nextgen Healthcare'}}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="4">
+                  Drop:
+                </ion-col>
+                <ion-col size="8">
+                    {{ schedule.type === 'LOGIN' ? 'Nextgen Healthcare': makeUserAddress(schedule.user)}}
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="schedule.status === 'WIP'">
+                <ion-col size="12" text-right>
+                  <ion-button color="dark" size="small">
+                      <ion-icon slot="start" name="log-out"></ion-icon>
+                      Logout
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col size="12" text-center>
+                    <ion-button *ngIf="schedule.status==='BOOKED'" color="light"  size="small">
+                      <ion-icon slot="icon-only" name="car"></ion-icon>
+                    </ion-button>
+                    <ion-button *ngIf="schedule.status!=='COMPLETED' && schedule.status!=='CANCEL'"  color="light"size="small">
+                      <ion-icon slot="icon-only" name="create"></ion-icon>
+                    </ion-button>
+                    <ion-button *ngIf="schedule.status==='BOOKED'" color="light" size="small">
+                      <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+        </ng-container>
+        <ng-container *ngIf="!isDateHaveSchedule(selectedDate)">
+          <ion-card color="light">
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                    <ion-col size="6" text-left>
+                      <ion-button (click)="addSchedule(selectedDate, 'LOGIN')" color="dark"  size="small">
+                          <ion-icon slot="start" name="log-in"></ion-icon>
+                          Login
+                      </ion-button>
+                    </ion-col>
+                    <ion-col size="6" text-left>
+                      <ion-button color="dark" size="small" (click)="addSchedule(selectedDate, 'LOGOUT')">
+                          <ion-icon slot="start" name="log-out"></ion-icon>
+                          Logout
+                      </ion-button>
+                    </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+
+ </ion-content>

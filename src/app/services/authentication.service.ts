@@ -12,8 +12,8 @@ const TOKEN_KEY = 'auth-token';
 export class AuthenticationService {
 
   authenticationState = new BehaviorSubject(false);
-  constructor(private storage: Storage, 
-    private plft:Platform,
+  currentUser: any;
+  constructor(private plft:Platform,
     private httpClient: HttpClient) { 
     this.plft.ready().then( ()=>{
       this.checkToken();
@@ -21,17 +21,19 @@ export class AuthenticationService {
   }
 
   checkToken() {
-    return this.storage.get(TOKEN_KEY).then(res=>{
-      if(res) {
-        this.authenticationState.next(true);
-      }
-    });
+    let token = localStorage.getItem(TOKEN_KEY);
+    if(!!token){
+      this.authenticationState.next(true);
+    }
   }
 
-  setToken(){
-    return this.storage.set(TOKEN_KEY, 'Bear 123456789').then(()=>{
-      this.authenticationState.next(true);
-    });
+  getToken(){
+    let token = localStorage.getItem(TOKEN_KEY);
+    return token;
+  }
+  
+  setToken(token){
+    return localStorage.setItem(TOKEN_KEY, `${token}`);
   }
 
   login(userName, password){
@@ -39,11 +41,17 @@ export class AuthenticationService {
   }
 
   logout(){
-    return this.storage.remove(TOKEN_KEY).then(()=> this.authenticationState.next(false));
+    localStorage.removeItem(TOKEN_KEY);
+    this.currentUser = null;
+    this.authenticationState.next(false)
   }
 
   isAuthenticated(){
     return this.authenticationState.value;
+  }
+
+  setCurrentUser(user){
+    this.currentUser = user;
   }
 }
 

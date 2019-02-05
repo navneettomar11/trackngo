@@ -13,7 +13,8 @@ export class LogoutPage implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.authenticationService.logout().then(()=> this.router.navigate(['login']));
+    this.authenticationService.logout();
+    this.router.navigate(['login']);
   }
 
 }
