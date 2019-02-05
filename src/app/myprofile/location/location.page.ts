@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserService } from '../../services/user.service';
+//import { NavController } from '@angular/core';
 
 @Component({
   selector: 'app-location',
@@ -13,7 +14,7 @@ export class LocationPage implements OnInit {
 
   private updateAddress: FormGroup;
 
-  constructor( private formBuilder: FormBuilder, private userService: UserService ) {
+  constructor( private formBuilder: FormBuilder, private userService: UserService) {
     this.updateAddress = this.formBuilder.group({
       name: [''],
       phoneNumber: [''],
@@ -31,6 +32,10 @@ export class LocationPage implements OnInit {
       this.data = data;
       this.success = true;
     });
+    
+  }
+  goback() {
+    window.history.back();
   }
 
 
