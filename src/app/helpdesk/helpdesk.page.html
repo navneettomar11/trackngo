@@ -10,7 +10,10 @@
             <ion-label>Problem Description : </ion-label>
             <ion-textarea formControlName="problem"></ion-textarea>
         </ion-item>
-        <ion-button type="submit" [disabled]="!helpDesk.valid" align-self-center="true">Submit</ion-button><ion-label>{{dataToStore.success}}</ion-label>
+        <ion-button type="submit" [disabled]="!helpDesk.valid" align-self-center="true">Submit</ion-button>
         <ion-button left class="loginnavbtn" (click)="goback()">CANCEL</ion-button>
     </form>
 </ion-content>
+<div padding *ngIf="success" class="message-area">
+    Data Saved successfully!!.
+</div>

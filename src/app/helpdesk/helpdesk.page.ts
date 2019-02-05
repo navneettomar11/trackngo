@@ -11,6 +11,7 @@ export class HelpdeskPage implements OnInit {
 
     private helpDesk: FormGroup;
     public dataToStore;
+    success: boolean;
 
 constructor(private formBuilder: FormBuilder, protected storage: Storage ) {
     this.dataToStore = {};
@@ -23,7 +24,7 @@ constructor(private formBuilder: FormBuilder, protected storage: Storage ) {
     console.log('Data sent to admin');
     this.helpDesk.value.success = '';
     this.dataToStore = this.helpDesk.value;
-
+    this.success = true;
     this.storage.set('object', this.dataToStore).then((successData) => {
       this.helpDesk.value.success = 'Successfully Saved!';
       console.log('Data Stored');
