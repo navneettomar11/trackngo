@@ -31,7 +31,9 @@ constructor(private formBuilder: FormBuilder, protected storage: Storage ) {
     });
     console.log(this.helpDesk.value);
   }
-
+  goback() {
+    window.history.back();
+  }
     ngOnInit() {
     }
 
