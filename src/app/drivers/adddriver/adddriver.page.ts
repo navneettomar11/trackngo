@@ -13,6 +13,7 @@ export class AdddriverPage implements OnInit {
 
   private addDriver: FormGroup;
   public dataToStore;
+  success: boolean;
 
   constructor(private formBuilder: FormBuilder, protected storage: Storage ) {
     this.dataToStore = {};
@@ -22,19 +23,20 @@ export class AdddriverPage implements OnInit {
       phoneNumber: ['', Validators.required],
       vehicleType: ['', Validators.required],
       capacity: ['', Validators.required],
-      description: ['']
+      description: [''],
+      route: ['', Validators.required]
     });
   }
   logForm() {
     this.addDriver.value.type = 'driver';
     this.addDriver.value.success = ' ';
     this.dataToStore = this.addDriver.value;
-    this.storage.set('object', this.dataToStore).then((successData) => {
+    this.storage.set(this.dataToStore.phoneNumber, this.dataToStore).then((successData) => {
       this.addDriver.value.success = 'Successfully Saved!'
       console.log('Data Stored');
       console.log(successData);
     });
-    console.log(this.addDriver.value);
+    this.success = true;
   }
 
   goback() {

@@ -13,13 +13,12 @@ export class DriverslistPage implements OnInit {
   protected key: any;
 
   constructor(protected storage: Storage) {
-    this.items = [];
   }
   ngOnInit() {
     this.storage.forEach( (value) => {
       if (value.type !== undefined) {
         if (value.type === 'driver') {
-          this.items.push('' + value.firstName + ' ' + value.lastName + ' : ' + value.vehicleType + ' ' + value.capacity + 'SEATER');
+          this.items.push('' + value.firstName + ' ' + value.lastName + ' : ' + value.vehicleType + ' ' + value.capacity + 'SEATER' + ' R:' + value.route);
         } else {
           this.items.push('No Driver\'s detail found!');
         }

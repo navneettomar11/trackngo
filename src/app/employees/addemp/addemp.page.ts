@@ -11,6 +11,7 @@ export class AddempPage implements OnInit {
 
   private addEmp: FormGroup;
   public dataToStore;
+  success: boolean;
 
   constructor( private formBuilder: FormBuilder, protected storage: Storage ) {
     this.addEmp = this.formBuilder.group({
@@ -24,11 +25,12 @@ export class AddempPage implements OnInit {
   logForm() {
     this.addEmp.value.type = 'employee';
     this.dataToStore = this.addEmp.value;
-    this.storage.set('object', this.dataToStore).then((successData) => {
+    this.storage.set(this.dataToStore.phoneNumber, this.dataToStore).then((successData) => {
       console.log('Data Stored');
       console.log(successData);
     });
     console.log(this.addEmp.value);
+    this.success = true;
   }
 
   ngOnInit() {

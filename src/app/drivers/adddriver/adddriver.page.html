@@ -43,7 +43,13 @@
       <ion-label>Address</ion-label>
       <ion-textarea formControlName="description"></ion-textarea>
     </ion-item>
+    <ion-item>
+      <ion-label>Route</ion-label>
+      <ion-input formControlName="route"></ion-input>
+    </ion-item>
     <ion-button type="submit" [disabled]="!addDriver.valid" align-self-center="true">Submit</ion-button><ion-button left class="loginnavbtn" (click)="goback()">CANCEL</ion-button>
-    <ion-label>{{dataToStore.success}}</ion-label>
   </form>
 </ion-content>
+<div padding *ngIf="success" class="message-area">
+  Data Saved successfully!!.
+</div>

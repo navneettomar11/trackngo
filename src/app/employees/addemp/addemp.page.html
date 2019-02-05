@@ -29,3 +29,6 @@
     <ion-button type="submit" [disabled]="!addEmp.valid" align-self-center="true">Submit</ion-button>
   </form>
 </ion-content>
+<div padding *ngIf="success" class="message-area">
+  Data Saved successfully!!.
+</div>

@@ -17,7 +17,7 @@ export class EmplistPage implements OnInit {
     this.storage.forEach( (value) => {
       if (value.type !== undefined) {
         if (value.type === 'employee') {
-          this.items.push('' + value.firstName + ' ' + value.lastName + ' : ' + value.empId);
+          this.items.push('' + value.firstName + ' ' + value.lastName + ' : ' + value.empId );
         } else {
           this.items.push('No Employee detail found!');
         }
