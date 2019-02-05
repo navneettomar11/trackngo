@@ -27,8 +27,10 @@ export class AdddriverPage implements OnInit {
   }
   logForm() {
     this.addDriver.value.type = 'driver';
+    this.addDriver.value.success = ' ';
     this.dataToStore = this.addDriver.value;
     this.storage.set('object', this.dataToStore).then((successData) => {
+      this.addDriver.value.success = 'Successfully Saved!'
       console.log('Data Stored');
       console.log(successData);
     });
@@ -36,6 +38,5 @@ export class AdddriverPage implements OnInit {
   }
 
   ngOnInit() {
-
   }
 }
