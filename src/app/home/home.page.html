@@ -41,7 +41,6 @@
                   <ion-col text-right size="7">
                       {{schedule.status}} 
                     </ion-col>
-                  
                 </ion-row>
               </ion-grid> 
              </ion-card-subtitle>
@@ -74,13 +73,13 @@
               </ion-row>
               <ion-row>
                   <ion-col size="12" text-center>
-                    <ion-button *ngIf="schedule.status==='TODO'" color="light"  size="small">
+                    <ion-button *ngIf="schedule.status==='BOOKED'" color="light"  size="small">
                       <ion-icon slot="icon-only" name="car"></ion-icon>
                     </ion-button>
                     <ion-button *ngIf="schedule.status!=='COMPLETED' && schedule.status!=='CANCEL'"  color="light"size="small">
                       <ion-icon slot="icon-only" name="create"></ion-icon>
                     </ion-button>
-                    <ion-button *ngIf="schedule.status==='TODO'" color="light" size="small">
+                    <ion-button *ngIf="schedule.status==='BOOKED'" color="light" size="small">
                       <ion-icon slot="icon-only" name="trash"></ion-icon>
                     </ion-button>
                   </ion-col>
@@ -95,13 +94,13 @@
               <ion-grid>
                 <ion-row>
                     <ion-col size="6" text-left>
-                      <ion-button (click)="addSchedule(date)" color="dark"  size="small">
+                      <ion-button (click)="addSchedule(selectedDate, 'LOGIN')" color="dark"  size="small">
                           <ion-icon slot="start" name="log-in"></ion-icon>
                           Login
                       </ion-button>
                     </ion-col>
                     <ion-col size="6" text-left>
-                      <ion-button color="dark" size="small">
+                      <ion-button color="dark" size="small" (click)="addSchedule(selectedDate, 'LOGOUT')">
                           <ion-icon slot="start" name="log-out"></ion-icon>
                           Logout
                       </ion-button>

@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
     {
       title: 'Schedule',
       url: '/list',
-      icon: 'time'
+      icon: 'time',
+      outlet: 'main'
     },
     {
       title: 'Book Schedule',
@@ -62,11 +64,13 @@ export class AppComponent {
     }
   ];
 
+  private user:any;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private authenticationService: AuthenticationService,
+    private userService: UserService,
     private router: Router
   ) {
     this.initializeApp();
@@ -86,12 +90,15 @@ export class AppComponent {
             icon: 'log-out'
           });
           this.router.navigate(['home']);
+          this.userService.getUserRecords().subscribe((user)=>{
+              this.user = user;
+          });
         }
       });
     });
   }
 
   getAppPages(){
-
+    return !!this.user && this.user.type==='ADMIN'?this.adminAppPages : this.appPages;
   }
 }

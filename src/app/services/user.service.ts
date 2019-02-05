@@ -17,7 +17,6 @@ export class UserService {
   }
 
   updateUser(id, data) {
-    console.log("hey there!!");
     return this.httpClient.post('/users', {id: id, data:data});
   }
 }

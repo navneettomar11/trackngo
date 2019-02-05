@@ -114,10 +114,13 @@ export class HomePage implements OnInit{
     this.selectedDate = date;
   }
 
-  async addSchedule(date){
+  async addSchedule(date, type){
     const modal :HTMLIonModalElement= await this.modalController.create({
       component: TimePickerComponent,
-      componentProps: { value: 123 }
+      componentProps: { 
+        componentType: type, 
+        scheduleDate: date 
+      }
     });
     return await modal.present();
   }

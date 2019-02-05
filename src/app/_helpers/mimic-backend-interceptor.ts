@@ -102,7 +102,6 @@ export class MimicBackendInterceptor implements HttpInterceptor{
       }else if (req.url.endsWith('/users') && req.method === 'GET') {
         return this.getUser(req);
       }else if (req.url.endsWith('/users') && req.method === 'POST') {
-        console.log("hdwgfhwrgwrgurwguerg");
         return this.updateUserData(req);
       }
       // pass through any requests not handled above
@@ -143,11 +142,10 @@ export class MimicBackendInterceptor implements HttpInterceptor{
 
   private getUser(req: HttpRequest<any>):Observable<HttpResponse<any>>{
     let headerToken = req.headers.get("Authorization");
-    let logginedUser: any = users.filter((schedule)=> schedule.id === headerToken);
-    if (Object.keys(logginedUser).length === 0) {
-      logginedUser = users[0];
+    if(!!headerToken){
+      headerToken = headerToken.replace('Bearer ','');  
     }
-    console.log("logginedUser final  ====", users[0]);
+    let logginedUser: any = users.filter((user)=> user.id === headerToken).pop();
     return of(new HttpResponse({status: 200, body: logginedUser}));
   }
 

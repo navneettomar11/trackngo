@@ -1,7 +1,7 @@
 <ion-card>
   <ion-card-header>
     <ion-card-subtitle>
-      Login
+      {{componentType}}
     </ion-card-subtitle>
   </ion-card-header>
   <ion-card-content padding>
@@ -10,22 +10,29 @@
           <ion-label>
             Pickup
           </ion-label>
-          <ion-textarea readonly>
-          </ion-textarea>
+          <p>
+            {{componentType ==='LOGIN' ? getAddress(): 'Nextgen Healthcare'}}
+          </p>
         </ion-item>
         <ion-item>
           <ion-label>
             Drop
           </ion-label>
-          <ion-textarea readonly></ion-textarea>
+          <p>{{componentType ==='LOGOUT' ? getAddress(): 'Nextgen Healthcare'}}</p>
         </ion-item>
+        <ion-item>
+            <ion-label>
+              Date
+            </ion-label>
+            <p>{{ scheduleDate | date :  "dd.MM.y" }}</p>
+          </ion-item>
         <ion-item>
           <ion-label>Time</ion-label>
           <ion-datetime display-format="HH:mm:ss" picker-format="HH:mm:ss"></ion-datetime>
         </ion-item>
         <div text-right>
           <ion-button>Submit</ion-button>
-          <ion-button>Cancel</ion-button>
+          <ion-button (click)="dismiss()">Close</ion-button>
         </div>
         </form>
         
